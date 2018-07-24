@@ -1,5 +1,5 @@
 #room_classification_get_datasets
-Project by Paul Asquin for Awabot - Summer 2018 paul.asquin@gmail.com  
+Project by [Paul Asquin](https://www.linkedin.com/in/paulasquin/) for Awabot - Summer 2018 paul.asquin@gmail.com  
 
 # I.Introduction  
 This repo is a part of the Room Classification Project. 
@@ -22,8 +22,9 @@ For a quick start, just run
 ```
 sudo python big_main.py
 ```
-
-This script will run every step to download and process the datasets. Still, it can stop at many steps due to dependencies lacking. For a slower but safer run, execute the following commands :  
+This script will run every step to download and process the datasets. Still, it can stop at many steps due to dependencies lacking.  
+For a slower but safer run, execute the following commands :  
+     
 ```
 sudo apt-get install build-essential libssl-dev libffi-dev python-dev python3 python3-pip  
 pip3 uninstall tensorflow --user  
