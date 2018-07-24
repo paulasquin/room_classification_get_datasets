@@ -76,3 +76,41 @@ mkdir ../Datasets"
 python3 scannet_download_from_txts.py"
 ```
 
+### b. Matterport  
+The [Matterport](https://matterport.com/) dataset contains, like ScanNet, .ply files. However, those files are the result of a complete house scan. Auxiliary files with the .house extension give a label to the regions of the house. Thus, it is possible to cross the datas to extract specific rooms.
+
+In order to download the Matrerport dataset, run : 
+```
+python3 matterport_download.py -o ../Datasets/HOUSE_SEGMENTATION --type house_segmentations
+```
+
+## 2. Process the datasets  
+### a. Cut the rooms into slices
+PLY files a 3D representation of rooms. Because we want to train an algorithm on 2D maps, as those created by regular mobile robot with LIDAR, we have to slice those datasets.
+Furthermore, we will choose multiple slice altitudes. The altitudes and the heigth of the slices are given into the "dataset"\_slicer.py
+Once the altitudes are chosen (or unchanged), you can run : 
+```
+sudo python3 scannet_slicer.py
+sudo python3 matterport_slicer.py
+```
+The datasets will be written under the Datasets/JPG, splited between Bathroom, Kitchen, etc, folders. They will form a new and unique dataset.
+
+### b. Clean and augment the dataset  
+Sometimes, datas can have strange shapes. They can be bugs on multiple levels causing an unwanted image : almost empty maps, non-representative architectures, noises... 
+You can remove those file by hand. But before that, you can use [image_processing.py](image_processing.py) rm technique to speed up the process. 
+For this, disable the automatic processing by changing the _CHOOSE_ variable from False to True. You can also fine tune the deleting conditions
+Then, run 
+```
+python3 image_processing.py 
+```
+Then, enter "rm" and press _Enter_ to run the deleting process.
+
+Once the dataset is cleaned, you can augment it, by choosing "aug" and press _Enter_.
+
+In order to train or re-train our models, we need a lot of data. 
+From the data we have, we have the possibility to create variants to enrich our total set, by using 4 different rotations of each maps and 2 mirror transformations (vertical and horizontal. 
+This operation allows the models to extract new features or generalizations. 
+Selecting multiple cutting heights is already a form of data augmentation. 
+We can also create new images from rotations or mirror effects of the original.
+
+If those steps saw an happy ending, you can move to either the _room_classification_from_scratch_cnn_ or _room_classification_network_retrain_ repo
