@@ -3,8 +3,9 @@
 
 import os
 import subprocess
-from PIL import Image
 import numpy as np
+from PIL import Image
+
 
 class Point:
     x = 0
@@ -49,12 +50,14 @@ def computeSections(lesAltitudes, sectionWidth):
         sectionsDownUp.append([alt - sectionWidth / 2, alt + sectionWidth / 2])
     return sectionsDownUp
 
-
 def relative_to_absolute_path(path=""):
     """ Send back absolute path if relative was given """
     # Check if not already absolute path
     if path == "":
         path = os.getcwd()
+    elif path[0] == ".":
+        up = path.count("../")
+        path = '/'.join(os.getcwd().split("/")[0:-up]) + "/" + path.replace("../", "")
     elif path[0] != "/":
         path = os.getcwd() + "/" + path
     return path
@@ -103,13 +106,11 @@ def filepathImage(pathToPly, label, imgFolder, prefix="", suffix="", folderName=
     if prefix != "":
         prefix = "-" + prefix
     sceneId = pathToPly.split("/")[-2] + "_" + pathToPly.split("/")[-3]
-    path = os.getcwd() + "/" + imgFolder + "/" + folderName + "/" + sceneId + prefix + suffix + "." + extension
+    path = imgFolder + "/" + folderName + "/" + sceneId + prefix + suffix + "." + extension
     return path
 
-
-def exportSlice(slice, extrema, path, label, width=500, height=500):
+def exportSlice(slice, extrema, path, label, imageFolder, width=500, height=500):
     """ Export an image from given slice. Use of extrema and shape for resolution, label for naming the image """
-    global imageFolder
     resize = slice.copy()
     minX, maxX, minY, maxY, minZ, maxZ = extrema
     # Put values to a [0, width-1]*[0, height-1] domain
@@ -137,6 +138,7 @@ def exportSlice(slice, extrema, path, label, width=500, height=500):
               str(np.min(slice['y'])) + " np.maxY : " + str(np.max(slice['y'])))
         return -1
     createFolder(imageFolder + "/" + str(label.title()))
+    print(path)
     try:
         img = Image.fromarray(image, 'RGB')
         if imageFolder[:3] == "JPG":
@@ -147,6 +149,8 @@ def exportSlice(slice, extrema, path, label, width=500, height=500):
         raise
     except:
         print("Problem exporting " + path)
+        img = Image.fromarray(image, 'RGB')
+        img.show()
         return -1
     print("\t" + path + " exported")
     return 0
