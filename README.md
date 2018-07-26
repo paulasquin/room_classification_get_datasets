@@ -82,7 +82,12 @@ Once the altitudes are chosen (or unchanged), you can run :
 sudo python3 scannet_slicer.py
 sudo python3 matterport_slicer.py
 ```
-The datasets will be written under the Datasets/JPG, splited between Bathroom, Kitchen, etc, folders. They will form a new and unique dataset.
+The datasets will be written under the Datasets/JPG, splited between Bathroom, Kitchen, etc, folders. They will form a new and unique dataset.  
+
+Here is an example of Matterport kitchen slices : 
+
+Altitude 0.4m : 
+![kitchen 0.4](docs/ex_kitchen-0.4.jpg)
 
 ### b. Clean and augment the dataset  
 Sometimes, datas can have strange shapes. They can be bugs on multiple levels causing an unwanted image : almost empty maps, non-representative architectures, noises... 
