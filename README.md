@@ -23,20 +23,8 @@ For a quick start, just run
 sudo python big_main.py
 ```
 This script will run every step to download and process the datasets. Still, it can stop at many steps due to dependencies lacking.  
-For a slower but safer run, execute the following commands :  
-     
-```
-sudo apt-get install build-essential libssl-dev libffi-dev python-dev python3 python3-pip  
-pip3 uninstall tensorflow --user  
-pip3 install opencv-python tensorflow==1.3 Pillow plydata --user  
-mkdir ../Datasets"  
-python3 scannet_download_from_txts.py"  
-python3 scannet_slicer.py"  
-python3 matterport_download.py -o ../Datasets/HOUSE_SEGMENTATION --type house_segmentations"  
-python3 matterport_unzipper.py"  
-python3 matterport_slicer.py"  
-python3 image_processing.py  
-```
+For a slower but safer run, follow the next instructions 
+
 # II. Goals and instructions for room_classification_get_datasets  
   
 ## 0. Get the dependencies  
@@ -102,7 +90,7 @@ You can remove those file by hand. But before that, you can use [image_processin
 For this, disable the automatic processing by changing the _CHOOSE_ variable from False to True. You can also fine tune the deleting conditions
 Then, run 
 ```
-python3 image_processing.py 
+sudo python3 image_processing.py 
 ```
 Then, enter "rm" and press _Enter_ to run the deleting process.
 
