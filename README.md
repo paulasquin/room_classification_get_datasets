@@ -86,8 +86,14 @@ The datasets will be written under the Datasets/JPG, splited between Bathroom, K
 
 Here is an example of Matterport kitchen slices : 
 
-Altitude 0.4m : 
+Altitude 0.4m :  
 ![kitchen 0.4](docs/ex_kitchen-0.4.jpg)
+
+Altitude 0.5m :  
+![kitchen 0.5](docs/ex_kitchen-0.5.jpg)
+
+Altitude 0.7m :  
+![kitchen 0.7](docs/ex_kitchen-0.7.jpg)
 
 ### b. Clean and augment the dataset  
 Sometimes, datas can have strange shapes. They can be bugs on multiple levels causing an unwanted image : almost empty maps, non-representative architectures, noises... 
