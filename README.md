@@ -87,7 +87,7 @@ The datasets will be written under the Datasets/JPG, splited between Bathroom, K
 Here is an example of Matterport kitchen slices : 
 
 Altitude 0.4m :  
-![kitchen 0.4](docs/ex_kitchen-0.4.jpg =250x)
+![kitchen 0.4](docs/ex_kitchen-0.4.jpg =100x)
 
 Altitude 0.5m :  
 ![kitchen 0.5](docs/ex_kitchen-0.5.jpg)
