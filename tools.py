@@ -2,6 +2,7 @@
 # Written by Paul Asquin paul.asquin@gmail.com for Awabot Intelligence, 2018
 
 import os
+import sys
 import subprocess
 import numpy as np
 from PIL import Image
@@ -138,7 +139,8 @@ def exportSlice(slice, extrema, path, label, imageFolder, width=500, height=500)
               str(np.min(slice['y'])) + " np.maxY : " + str(np.max(slice['y'])))
         return -1
     createFolder(imageFolder + "/" + str(label.title()))
-    print(path)
+    print("\t" + path.split("/")[-1], end="")
+    sys.stdout.flush()
     try:
         img = Image.fromarray(image, 'RGB')
         if imageFolder[:3] == "JPG":
@@ -148,11 +150,11 @@ def exportSlice(slice, extrema, path, label, imageFolder, width=500, height=500)
     except KeyboardInterrupt:
         raise
     except:
-        print("Problem exporting " + path)
+        print("\n!!! Problem exporting " + path)
         img = Image.fromarray(image, 'RGB')
         img.show()
         return -1
-    print("\t" + path + " exported")
+    print(" - exported")
     return 0
 
 def getSlices(lesPoints, sectionsDownUp):
