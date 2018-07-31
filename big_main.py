@@ -20,7 +20,7 @@ LES_SCRIPTS = [
         "Uninstalling other tensorflow version"
     ),		
     Script(
-        "pip3 install opencv-python tensorflow==1.3 --user",
+        "pip3 install opencv-python tensorflow==1.3 Pillow plydata --user",
         "Installing cv2, tensorflow"
     ),	
     Script(
