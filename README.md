@@ -105,11 +105,8 @@ You can remove those file by hand. But before that, you can use [image_processin
 For this, disable the automatic processing by changing the _CHOOSE_ variable from False to True. You can also fine tune the deleting conditions
 Then, run 
 ```
-sudo python3 image_processing.py 
+sudo python3 image_processing.py --clean --augment
 ```
-Then, enter "rm" and press _Enter_ to run the deleting process.
-
-Once the dataset is cleaned, you can augment it, by choosing "aug" and press _Enter_.
 
 In order to train or re-train our models, we need a lot of data. 
 From the data we have, we have the possibility to create variants to enrich our total set, by using 4 different rotations of each maps and 2 mirror transformations (vertical and horizontal. 

@@ -9,7 +9,7 @@ from tools import *
 
 LES_ALTITUDES = [0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 0.9, 1]  # Altitudes around which the section will be taken
 SECTION_HEIGHT = 0.02  # A section is 2 cm high
-IMAGE_FOLDER = "../Datasets/JPGh02"
+IMAGE_FOLDER = "../Datasets/JPG"
 PLY_FOLDER = "../Datasets/HOUSE_SEGMENTATION"
 IMAGE_SIZE = 256
 LES_LABELS = [
