@@ -115,11 +115,11 @@ def main():
     parser.add_argument('--type', help='specific file type to download (.aggregation.json, .sens, .txt, _vh_clean.ply, _vh_clean_2.0.010000.segs.json, _vh_clean_2.ply, _vh_clean.segs.json, _vh_clean.aggregation.json, _vh_clean_2.labels.ply, _2d-instance.zip, _2d-instance-filt.zip, _2d-label.zip, _2d-label-filt.zip)')
     args = parser.parse_args()
 
-    # print('By pressing any key to continue you confirm that you have agreed to the ScanNet terms of use as described at:')
-    # print(TOS_URL)
-    #print('***')
-    # print('Press any key to continue, or CTRL-C to exit.')
-    # key = raw_input('')
+    print('By pressing any key to continue you confirm that you have agreed to the ScanNet terms of use as described at:')
+    print(TOS_URL)
+    print('***')
+    print('Press Enter to continue, or CTRL-C to exit.')
+    key = input('')
 
     release_file = BASE_URL + RELEASE + '.txt'
     release_scans = get_release_scans(release_file)
@@ -152,10 +152,10 @@ def main():
             print('WARNING: You are downloading the entire ScanNet release which requires ' + RELEASE_SIZE + ' of space.')
         else:
             print('WARNING: You are downloading all ScanNet scans of type ' + file_types[0])
-        # print('Note that existing scan directories will be skipped. Delete partially downloaded directories to re-download.')
-        # print('***')
-        print('Press any key to continue, or CTRL-C to exit.')
-        # key = raw_input('')
+        print('Note that existing scan directories will be skipped. Delete partially downloaded directories to re-download.')
+        print('***')
+        print('Press Enter to continue, or CTRL-C to exit.')
+        key = input('')
         download_release(release_scans, args.out_dir, file_types)
 
 

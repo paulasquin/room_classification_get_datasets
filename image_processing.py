@@ -6,6 +6,7 @@ import PIL
 
 LES_AUGMENTATION = ['width-flip', 'height-flip', 'cwRotate', 'ccwRotate', 'inverse']
 DATASET_FOLDER = "../Datasets/JPG"
+CHOOSE = False
 
 
 def delBlankImage(lesImgPath):
@@ -82,8 +83,7 @@ def augmentImage(lesImgPath):
 
 
 def main():
-    choose = False
-    while choose:
+    while CHOOSE:
         command = input("Enter \n"
                         "\t- 'rm' to del blank-like images from the dataset " + DATASET_FOLDER + "\n" + \
                         "\t- 'aug' to augment the dataset with " + ', '.join(LES_AUGMENTATION) + "\n" + \
@@ -97,7 +97,7 @@ def main():
             return 0
         else:
             print("Command not understood")
-    if not choose:
+    if not CHOOSE:
         delBlankImage(locate_files(extension=".jpg", dbName="image", path=DATASET_FOLDER))
         augmentImage(locate_files(extension=".jpg", dbName="image", path=DATASET_FOLDER))
 

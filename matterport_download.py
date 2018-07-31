@@ -118,11 +118,11 @@ def main():
     parser.add_argument('--type', nargs='+', help='specific file types to download. Any of: ' + ','.join(FILETYPES))
     args = parser.parse_args()
 
-    #print('By pressing any key to continue you confirm that you have agreed to the MP terms of use as described at:')
+    print('By pressing Enter to continue you confirm that you have agreed to the MP terms of use as described at:')
     print(TOS_URL)
-    #print('***')
-    #print('Press Enter to continue, or CTRL-C to exit.')
-    #key = raw_input('')
+    print('***')
+    print('Press Enter to continue, or CTRL-C to exit.')
+    key = input('')
 
     release_file = BASE_URL + RELEASE + '.txt'
     release_scans = get_release_scans(release_file)
@@ -137,7 +137,7 @@ def main():
             print('ERROR: Unrecognized task data id: ' + args.task_data)
         print('Done downloading task_data for ' + str(args.task_data))
         print('Press Enter to continue on to main dataset download, or CTRL-C to exit.')
-        key = raw_input('')
+        key = input('')
     # download specific file types?
     if args.type:
         if not set(args.type) & set(FILETYPES):
@@ -159,8 +159,8 @@ def main():
             print('WARNING: You are downloading all MP scans of type ' + file_types[0])
         print('Note that existing scan directories will be skipped. Delete partially downloaded directories to re-download.')
         print('***')
-        #print('Press any key to continue, or CTRL-C to exit.')
-        #key = input('')
+        print('Press Enter to continue, or CTRL-C to exit.')
+        key = input('')
         out_dir = os.path.join(args.out_dir, RELEASE)
         download_release(release_scans, out_dir, file_types)
 
