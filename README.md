@@ -41,10 +41,9 @@ For this project, we are using datasets from [ScanNet](http://www.scan-net.org/)
 In order to get them, we are using the scripts given by those organization [scannet_donwload.py](scannet_donwload.py) and [matterport_slicer.py](matterport_slicer.py).
 We are also using specific command to class those datas. For the ScanNet dataset, we have developed [scannet_download_from_txts.py](scannet_download_from_txts.py).  
   
-**WARNING** : In order to use those datasets, you need to obtain the autorization of ScanNet and Matterport teams.
-
-> For Matterport : you will wind the instructions to accept the [END USER LICENSE AGREEMENT](http://dovahkiin.stanford.edu/matterport/public/MP_TOS.pdf) in the Data section of their [Github page](https://github.com/niessner/Matterport)  
-> For ScanNet : you will find the instructions to accept the [ScanNet Terms of Use](http://dovahkiin.stanford.edu/scannet-public/ScanNet_TOS.pdf) in the ScanNet Data section of their [Github page](https://github.com/ScanNet/ScanNet)
+**WARNING** : In order to use those datasets, you need to obtain autorizations from ScanNet and Matterport teams.  
+\- For Matterport : you will wind the instructions to accept the [END USER LICENSE AGREEMENT](http://dovahkiin.stanford.edu/matterport/public/MP_TOS.pdf) in the _Data_ section of their [Github page](https://github.com/niessner/Matterport)  
+\- For ScanNet : you will find the instructions to accept the [ScanNet Terms of Use](http://dovahkiin.stanford.edu/scannet-public/ScanNet_TOS.pdf) in the _ScanNet Data_ section of their [Github page](https://github.com/ScanNet/ScanNet)  
 
 ### a. ScanNet  
 [ScanNet](http://www.scan-net.org/) is a dataset developped by Stanford University, Princeton University and the Technical University of Munich. 
