@@ -7,13 +7,11 @@ import io
 import sys
 from tools import *
 
-LES_ALTITUDES = [0.2, 0.4, 0.5, 0.7, 1]  # Altitudes around which the section will be taken
-SECTION_HEIGHT = 0.04  # A section is 4 cm high
-IMAGE_FOLDER = "../Datasets/JPG"
+LES_ALTITUDES = [0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 0.9, 1]  # Altitudes around which the section will be taken
+SECTION_HEIGHT = 0.02  # A section is 2 cm high
+IMAGE_FOLDER = "../Datasets/JPGh02"
 PLY_FOLDER = "../Datasets/HOUSE_SEGMENTATION"
-IMAGE_SIZE = 500
-if IMAGE_SIZE != 500:
-    IMAGE_FOLDER += "_" + str(IMAGE_SIZE)
+IMAGE_SIZE = 256
 LES_LABELS = [
     ["a", "bathroom"],
     ["b", "bedroom"],
@@ -36,54 +34,6 @@ def getMetas(pathToHouse):
                     lesMeta.append(ligneProcess)
                     lesCorrespLabel.append(label[1])
     return lesMeta, lesCorrespLabel
-
-
-def extractRoomLoop(lesMeta, pathToPly):
-    lesBoundsBox = []
-    lesRoomPly = [np.array((0, 0, 0), dtype=[('x', 'f4'), ('y', 'f4'), ('z', 'f4')])] * len(lesMeta)
-    for meta in lesMeta:
-        # Get bounds values
-        val_p = meta[4].split(" ")
-        val_lo = meta[5].split(" ")
-        val_hi = meta[6].split(" ")
-
-        # Write value to BoundsBox object
-        lesBoundsBox.append(
-            BoundsBox(
-                Point(float(val_p[0]), float(val_p[1]), float(val_p[2])),
-                Point(float(val_lo[0]), float(val_lo[1]), float(val_lo[2])),
-                Point(float(val_hi[0]), float(val_hi[1]), float(val_hi[2]))
-            )
-        )
-
-    print("Opening " + pathToPly + " this may take a while...", end="")
-    sys.stdout.flush()
-    plydata = PlyData.read(pathToPly)
-    print(" - Done !")
-    lenVertex = plydata['vertex'].count
-
-    # Initialize first point write in lesRoomPly
-    init = [True] * len(lesBoundsBox)
-    for i in range(lenVertex):
-        if i % 10000 == 0:
-            print(str(i) + "/" + str(lenVertex) + " vertex")
-        (x, y, z, _, _, _, _, _, _, _, _) = plydata['vertex'][i]
-        for j, bound in enumerate(lesBoundsBox):
-            if bound.lo <= Point(float(x), float(y), float(z)) <= bound.hi:
-                if init[j]:
-                    init[j] = False
-                    lesRoomPly[j] = np.array(
-                        (x, y, z),
-                        dtype=[('x', 'f4'), ('y', 'f4'), ('z', 'f4')]
-                    )
-                else:
-                    lesRoomPly[j] = np.append(
-                        lesRoomPly[j],
-                        np.array(
-                            (x, y, z),
-                            dtype=[('x', 'f4'), ('y', 'f4'), ('z', 'f4')])
-                    )
-    return lesRoomPly
 
 
 def extractRoom(lesMeta, pathToPly):
@@ -167,7 +117,8 @@ def generateImage(pathToPly, pathToHouse):
                         extension="jpg",
                         imgFolder=IMAGE_FOLDER),
                     width=IMAGE_SIZE,
-                    height=IMAGE_SIZE) != 0:
+                    height=IMAGE_SIZE,
+                    imageFolder=IMAGE_FOLDER) != 0:
                 print("Error with export of " + str(lesCorrespLabel[k]) + " altitude " + str(LES_ALTITUDES[i]))
                 # log error
                 with open(IMAGE_FOLDER + "/house_error.log", 'a') as f:

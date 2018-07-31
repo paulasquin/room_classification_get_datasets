@@ -7,12 +7,12 @@ import numpy as np
 import io
 from tools import *
 
-LES_ALTITUDES = [0.4, 0.5, 0.7]  # Altitudes around which the section will be taken
-SECTION_HEIGHT = 0.04  # A section is 4 cm high
-IMG_FOLDER = relative_to_absolute_path("../Datasets/JPG")
+LES_ALTITUDES = [0.2, 0.3, 0.4, 0.5, 0.7, 0.8, 0.9, 1]  # Altitudes around which the section will be taken
+SECTION_HEIGHT = 0.02  # A section is 2 cm high
+IMG_FOLDER = relative_to_absolute_path("../Datasets/JPGh02")
 PLY_FOLDER = relative_to_absolute_path("../Datasets/Scannet_PLY")
 LABEL_FOLDER = "Scannet_IDs"
-IMG_SIZE = 500
+IMG_SIZE = 256
 
 
 def getLabels():
