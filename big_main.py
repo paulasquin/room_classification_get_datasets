@@ -48,7 +48,7 @@ LES_SCRIPTS = [
         "Slicing the Matterport dataset"
     ),
     Script(
-        "python3 image_processing.py",
+        "python3 image_processing.py --clean --augment",
         "Augmenting datasets"
     )
 ]
