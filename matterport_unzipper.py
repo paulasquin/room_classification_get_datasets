@@ -1,5 +1,6 @@
-# Unzip elements froms Matterport dataset
-# Written by Paul Asquin paul.asquin@gmail.com for Awabot Intelligence, 2018
+#!/usr/bin/python3
+# Unzip elements from the Matterport dataset
+# Written by Paul Asquin - paul.asquin@gmail.com - Summer 2018
 
 
 from __future__ import print_function
@@ -31,7 +32,7 @@ def unzip(path):
 
 
 def main():
-    lesZipFile = locate_files(extension=".zip", dbName="locateZip", path="../Datasets")
+    lesZipFile = locate_files(extension=".zip", dbName="locateZip", path="../Datasets/HOUSE_SEGMENTATION")
     for zipFile in lesZipFile:
         if unzip(zipFile) == 1:
             return 1
