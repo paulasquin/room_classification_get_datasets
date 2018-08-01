@@ -1,5 +1,5 @@
 #room_classification_get_datasets
-Project by [Paul Asquin](https://www.linkedin.com/in/paulasquin/) for Awabot - Summer 2018 paul.asquin@gmail.com  
+Project by [Paul Asquin](https://www.linkedin.com/in/paulasquin/) - Summer 2018 - paul.asquin@gmail.com  
 
 # I.Introduction  
 This repo is a part of the Room Classification Project. 
@@ -42,8 +42,8 @@ In order to get them, we are using the scripts given by those organization [scan
 We are also using specific command to class those datas. For the ScanNet dataset, we have developed [scannet_download_from_txts.py](scannet_download_from_txts.py).  
   
 **WARNING** : In order to use those datasets, you need to obtain autorizations from ScanNet and Matterport teams.  
-\- For Matterport : you will wind the instructions to accept the [END USER LICENSE AGREEMENT](http://dovahkiin.stanford.edu/matterport/public/MP_TOS.pdf) in the _Data_ section of their [Github page](https://github.com/niessner/Matterport)  
-\- For ScanNet : you will find the instructions to accept the [ScanNet Terms of Use](http://dovahkiin.stanford.edu/scannet-public/ScanNet_TOS.pdf) in the _ScanNet Data_ section of their [Github page](https://github.com/ScanNet/ScanNet)  
+\- For Matterport : you will wind the instructions to accept the [END USER LICENSE AGREEMENT](http://dovahkiin.stanford.edu/matterport/public/MP_TOS.pdf) in the _Data_ of the [Matterport Github page](https://github.com/niessner/Matterport)  
+\- For ScanNet : you will find the instructions to accept the [ScanNet Terms of Use](http://dovahkiin.stanford.edu/scannet-public/ScanNet_TOS.pdf) in the _ScanNet Data_ section of the [ScanNet Github page](https://github.com/ScanNet/ScanNet)  
 
 ### a. ScanNet  
 [ScanNet](http://www.scan-net.org/) is a dataset developped by Stanford University, Princeton University and the Technical University of Munich. 
@@ -101,17 +101,27 @@ Altitude 0.7m :
 
 ### b. Clean and augment the dataset  
 Sometimes, datas can have strange shapes. They can be bugs on multiple levels causing an unwanted image : almost empty maps, non-representative architectures, noises... 
-You can remove those file by hand. But before that, you can use [image_processing.py](image_processing.py) rm technique to speed up the process. 
-For this, disable the automatic processing by changing the _CHOOSE_ variable from False to True. You can also fine tune the deleting conditions
-Then, run 
+You can remove those file by hand. But before that, you can use [image_processing.py](image_processing.py) techniques to speed up the process.  
+  
+You can use [image_processing.py](image_processing.py) in order to :  
+\- **Remove blank-like images** with the argument _--blank_. The most common bug is almost no data in the extracted room. This bug mainly comes from the Matterport Dataset where rooms are not well bounded. 
+Thus, resulting maps will be empty, or almost empty. To detect this bug, we check the size of the jpg image : if its size is under 3ko, the image is deleted. 
+You may want to choose your own size value, especially if you are choosing to change the maps resolution.  
+  
+\- **Clean the dataset** with the argument _--clean_. We already have made some hand cleaning in our datasets. Then, we exported the name of the lefting rooms in the [clean_dataset.txt](clean_dataset.txt) file.
+Using the _--clean_ argument, the programm will run --blank, then will remove every map extracted from rooms not indicated in [clean_dataset.txt](clean_dataset.txt).  
+  
+\- **Generate [clean_dataset.txt](clean_dataset.txt)** with the argument _--make_clean_dataset_. 
+If you end up with a dataset well cleaned for your usage, you can run the _make\_clean\_dataset_ argument to generate your own [clean_dataset.txt](clean_dataset.txt).  
+  
+\- **Augment the dataset** with the argument _--augment_. You can generate map augmentations using this argument. Your dataset will end up with the 4 rotations of each maps and a vertical and horizontal mirror-flip of the original map. 
+An augmentation allows the model to better extract new features or generalizations. Yet, the augmentation process may lead to [overfitting](https://en.wikipedia.org/wiki/Overfitting). 
+To prevent this phenomenon, we will have to check our model training graphs. The _validation accuracy_ should never decrease.  
+
+Be carefull, the order maters when you enter arguments calling [image_processing.py](image_processing.py). You want to clean the dataset before augmenting it.  
+In order to one-shot this part, just run : 
 ```
 sudo python3 image_processing.py --clean --augment
-```
-
-In order to train or re-train our models, we need a lot of data. 
-From the data we have, we have the possibility to create variants to enrich our total set, by using 4 different rotations of each maps and 2 mirror transformations (vertical and horizontal. 
-This operation allows the models to extract new features or generalizations. 
-Selecting multiple cutting heights is already a form of data augmentation. 
-We can also create new images from rotations or mirror effects of the original.
-
-If those steps saw an happy ending, you can move to either the _room_classification_from_scratch_cnn_ or _room_classification_network_retrain_ repo
+```  
+  
+If those steps saw a happy ending, you can move to either the _room_classification_from_scratch_cnn_ or _room_classification_network_retrain_ repo
