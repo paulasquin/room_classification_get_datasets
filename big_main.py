@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+# One shot script aimed to download, generate and sort the dataset for the Room Classification Project
+# Written by Paul Asquin - paul.asquin@gmail.com - Summer 2018
+
 import subprocess
 
 

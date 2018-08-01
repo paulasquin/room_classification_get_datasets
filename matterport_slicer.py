@@ -1,5 +1,6 @@
+#!/usr/bin/python3
 # Script to detect, open and convert .ply files to image files, slices at regular altitude from the ply mesh.
-# Written by Paul Asquin for Awabot Intelligence, June 2018
+# Written by Paul Asquin - paul.asquin@gmail.com - Summer 2018
 from __future__ import print_function
 from plyfile import PlyData  # , PlyElement
 import numpy as np

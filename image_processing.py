@@ -1,12 +1,13 @@
-#  Process images to augment the dataset or clean it of blank like image
-# Written by Paul Asquin paul.asquin@gmail.com for Awabot Intelligence, 2018
+#!/usr/bin/python3
+# Process the dataset to clean it and augment it
+# Written by Paul Asquin - paul.asquin@gmail.com - Summer 2018
 
 from tools import *
 import PIL
 import sys
 
 LES_AUGMENTATION = ['width-flip', 'height-flip', 'cwRotate', 'ccwRotate', 'inverse']
-DATASET_FOLDER = "../Datasets/JPGh02"
+DATASET_FOLDER = "../Datasets/JPG"
 
 
 def cleanDataset(lesImgPath):

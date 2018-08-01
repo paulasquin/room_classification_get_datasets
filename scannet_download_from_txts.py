@@ -1,5 +1,6 @@
-# Automating scene downloading of scene id files
-# Written by Paul Asquin paul.asquin@gmail.com for Awabot Intelligence, 2018
+#!/usr/bin/python3
+# Automated scene downloading of scene using id files
+# Written by Paul Asquin - paul.asquin@gmail.com - Summer 2018
 
 from tools import *
 import subprocess
@@ -9,7 +10,8 @@ PLY_FOLDER = "../Datasets/Scannet_PLY"
 
 
 def downloadScene(sceneId, folder):
-    # scannet_download.py manage itself already downloaded files
+    """ Use scannet_download.py to dowbload the ScanNet .ply dataset """
+    # scannet_download.py manages itself already downloaded files
     cmd = "python scannet_download.py -o " + folder + "/ --id " + sceneId + " --type _vh_clean_2.ply"
 
     p = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
