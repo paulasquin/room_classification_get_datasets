@@ -17,6 +17,9 @@ Here is the overall architecture of the project :
 ├── room_classification_network_retrain  
 ├── Datasets (created by room_classification_get_datasets)  
 
+![Room Classification Project Architecture](docs/project_architecture.png)  
+_Room Classification Project Architecture_  
+
 For a quick start, just run  
 
 ```
