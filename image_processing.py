@@ -6,7 +6,7 @@ import PIL
 import sys
 
 LES_AUGMENTATION = ['width-flip', 'height-flip', 'cwRotate', 'ccwRotate', 'inverse']
-DATASET_FOLDER = "../Datasets/JPG"
+DATASET_FOLDER = "../Datasets/JPGh02"
 
 
 def cleanDataset(lesImgPath):
@@ -65,6 +65,8 @@ def delBlankImage(lesImgPath):
             os.remove(path)
             with open("empty_image.txt", "a") as f:
                 f.write(path + "\n")
+        else:
+            print("\tKeeping " + path.split("/")[-1] + " " * 30, end="\r")
     print("Completed")
     return 0
 
@@ -88,40 +90,35 @@ def augmentImage(lesImgPath):
     """ Apply augmentation operations defined by LES_AUGMENTATION corresponding to PIL transformations"""
     global LES_AUGMENTATION
     print(', '.join(LES_AUGMENTATION))
-    for imgPath in lesImgPath:
+    for i, imgPath in enumerate(lesImgPath):
         with PIL.Image.open(imgPath) as img:
-            print(imgPath)
+            print(str(i=1) + "/" + str(len(lesImgPath)) + " : Augmenting " + imgPath.split("/")[-1], end="\r")
             for augmentation in LES_AUGMENTATION:
                 if augmentation == 'width-flip' and notAlreadyAugmented(imgPath=imgPath, augmentation=augmentation):
-                    print("\t" + augmentation + " Augmenting")
                     img.transpose(PIL.Image.FLIP_LEFT_RIGHT).save(
                         getAugmentationPath(
                             imgPath=imgPath,
                             augmentation=augmentation)
                     )
                 elif augmentation == 'height-flip' and notAlreadyAugmented(imgPath=imgPath, augmentation=augmentation):
-                    print("\t" + augmentation + " Augmenting")
                     img.transpose(PIL.Image.FLIP_TOP_BOTTOM).save(
                         getAugmentationPath(
                             imgPath=imgPath,
                             augmentation=augmentation)
                     )
                 elif augmentation == 'cwRotate' and notAlreadyAugmented(imgPath=imgPath, augmentation=augmentation):
-                    print("\t" + augmentation + " Augmenting")
                     img.transpose(PIL.Image.ROTATE_270).save(
                         getAugmentationPath(
                             imgPath=imgPath,
                             augmentation=augmentation)
                     )
                 elif augmentation == 'ccwRotate' and notAlreadyAugmented(imgPath=imgPath, augmentation=augmentation):
-                    print("\t" + augmentation + " Augmenting")
                     img.transpose(PIL.Image.ROTATE_90).save(
                         getAugmentationPath(
                             imgPath=imgPath,
                             augmentation=augmentation)
                     )
                 elif augmentation == 'inverse' and notAlreadyAugmented(imgPath=imgPath, augmentation=augmentation):
-                    print("\t" + augmentation + " Augmenting")
                     img.transpose(PIL.Image.ROTATE_180).save(
                         getAugmentationPath(
                             imgPath=imgPath,
@@ -130,10 +127,10 @@ def augmentImage(lesImgPath):
 
 
 def main():
-    lesImgPath = locate_files(extension=".jpg", dbName="image", path=DATASET_FOLDER)
     for i, arg in enumerate(sys.argv[1:]):
+        lesImgPath = locate_files(extension=".jpg", dbName="image", path=DATASET_FOLDER)
         if arg == "--blank":
-            delBlankImage()
+            delBlankImage(lesImgPath)
         elif arg == "--augment":
             augmentImage(lesImgPath)
         elif arg == "--clean":
