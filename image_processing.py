@@ -12,8 +12,8 @@ DATASET_FOLDER = "../Datasets/JPG"
 
 def cleanDataset(lesImgPath):
     """ Del images that are not present in clean_dataset.txt """
-    print(
-        "Going to remove every blank-like images (<3ko) and every room not present in clean_dataset.txt. Are you sure ?")
+    print("Going to remove every blank-like images (<3ko) + \
+        and every room not present in clean_dataset.txt. Are you sure ?")
     print("Press Enter to continue, CTRL+C to exit")
     key = input('')
     print("Removing 'blank-like' images...")
@@ -36,19 +36,28 @@ def cleanDataset(lesImgPath):
 
 def makeCleanDataset(lesImgPath):
     """ Generate the file clean_dataset.txt using the room in the diven dataset path considering every image room presented is ok for you"""
+    print("Generating a new clean_dataset.txt file.")
+    print("Checking if the file alread exists", end="")
+    sys.stdout.flush()
     if os.path.isfile("clean_dataset.txt"):
+        print(" : Yes, removing")
         os.remove("clean_dataset.txt")
+    else:
+        print(" : Not alteady existing")
+
+    print("Writing files name")
     lesGood = []
     with open("clean_dataset.txt", "w") as f:
         for path in lesImgPath:
             name = path.split("/")[-1].replace(".jpg", "")
+            # Extracting room name
             if "scene" in name:
                 room = name.split("-")[0]  # We get something like 'scene0009_00'
             elif "segmentations" in name:
                 room = "-".join(
                     name.split("-")[:3])  #  We get something like 'house_segmentations_17DRP5sb8fy-1-bathroom'
             else:
-                print("Error structure name of " + path)
+                print("Error in the name structure of " + path)
                 continue
             if room not in lesGood:
                 lesGood.append(room)

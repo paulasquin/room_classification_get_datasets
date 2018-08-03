@@ -22,20 +22,20 @@ def downloadScene(sceneId, folder):
 
 def main():
     createFolder(PLY_FOLDER)
-    lesFile = locate_files('.txt', relative_to_absolute_path(LABEL_FOLDER), dbName="scannet_txt_id")
-    lesFolder = []
-    for file in lesFile:
+    les_files = locate_files('.txt', relative_to_absolute_path(LABEL_FOLDER), dbName="scannet_txt_id")
+    les_folders = []
+    for file in les_files:
         fileName = file.split("/")[-1]
         print("--- " + str(fileName) + " ---")
-        lesFolder.append(fileName.replace(".txt", "").title())
-        createFolder(lesFolder[-1])
+        les_folders.append(fileName.replace(".txt", "").title())
+        createFolder(les_folders[-1])
         with open(file, 'r') as f:
             for line in f:
                 line = line.replace("\n", "")
                 if "scene" in line:
                     print("Downloading " + str(line))
                     try:
-                        downloadScene(sceneId=line, folder=relative_to_absolute_path(PLY_FOLDER) + "/" + lesFolder[-1])
+                        downloadScene(sceneId=line, folder=relative_to_absolute_path(PLY_FOLDER) + "/" + les_folders[-1])
                     except KeyboardInterrupt:
                         return 0
 

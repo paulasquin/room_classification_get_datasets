@@ -43,6 +43,7 @@ def extractRoom(lesMeta, pathToPly):
     lesBoundsBox = []
     lesRoomPly = []
     for meta in lesMeta:
+        print("Creating bounds boxes")
         # Get bounds values
         val_p = meta[4].split(" ")
         val_lo = meta[5].split(" ")

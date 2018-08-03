@@ -9,6 +9,10 @@ import zipfile
 from tools import *
 
 
+HOUSE_SEGMENTATION_PATH = "../Datasets/HOUSE_SEGMENTATION"
+
+
+
 def unzip(path):
     """ Unzip given files ; log success and error"""
     print("Unzipping " + path, end="")
@@ -32,7 +36,7 @@ def unzip(path):
 
 
 def main():
-    lesZipFile = locate_files(extension=".zip", dbName="locateZip", path="../Datasets/HOUSE_SEGMENTATION")
+    lesZipFile = locate_files(extension=".zip", dbName="locateZip", path=HOUSE_SEGMENTATION_PATH)
     for zipFile in lesZipFile:
         if unzip(zipFile) == 1:
             return 1
